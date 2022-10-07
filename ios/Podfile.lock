@@ -1,0 +1,16 @@
+PODS:
+  - YunoSDK (1.0.10)
+
+DEPENDENCIES:
+  - YunoSDK (~> 1.0.10)
+
+SPEC REPOS:
+  trunk:
+    - YunoSDK
+
+SPEC CHECKSUMS:
+  YunoSDK: 538e40ad80ead4d195f1581c29aff4d1bf8c7bca
+
+PODFILE CHECKSUM: 95cdc70b880694a6ad2f6c49e8d637df374c24bf
+
+COCOAPODS: 1.11.3
