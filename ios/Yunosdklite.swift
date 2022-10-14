@@ -66,6 +66,8 @@ class Yunosdklite: NSObject, YunoPaymentDelegate {
        resolve: @escaping RCTPromiseResolveBlock,
        rejecter reject:  @escaping RCTPromiseRejectBlock
      ) -> Void {
+         self.resolver = nil;
+         self.rejecter = nil;
        DispatchQueue.main.async {
          self.resolver = resolve;
          self.rejecter = reject;
@@ -82,16 +84,23 @@ class Yunosdklite: NSObject, YunoPaymentDelegate {
        DispatchQueue.main.async {
          Yuno.continuePayment()
        }
+       resolve(true)
     }
      
+    func yunoPaymentResult(_ result: Yuno.Result) {
+        debugPrint("type: yunoPaymentResult \(result)")
+        switch result {
+            case .userCancell:
+                self.rejecter?("Error", "Payment was cancelled", nil)
+            @unknown default:
+                debugPrint("type: yunoPaymentResult @unknown: \(result)")
+            }
+    }
+    
     func yunoCreatePayment(with token: String) {
        debugPrint("type: yunoCreatePayment \(token)")
        self.tokenResult = token
-       self.resolver?(token);
-    }
-    
-    func yunoPaymentResult(_ result: Yuno.Result) {
-      debugPrint("type: yunoPaymentResult \(result)")
+       self.resolver?(token)
     }
     
     func yunoDidSelect(paymentMethod: PaymentMethodSelected) {
