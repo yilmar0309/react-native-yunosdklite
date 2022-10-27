@@ -47,7 +47,7 @@ const App = () => {
   async function initSDK() {
     if (Platform.OS === 'ios') {
       try {
-        const result = await initSdkYuno('API_KEY');
+        const result = await initSdkYuno('PUBLIC_KEY');
         console.log('result', result);
       } catch (error) {
         console.log('ERROR -> ', error);
@@ -58,7 +58,7 @@ const App = () => {
   const createCustomer = async () => {
     try {
       const data = {
-        merchant_customer_id: account_id,
+        merchant_customer_id: 'YOUR_ID_FROM_YOUR_DB',
         first_name: 'test_name',
         last_name: 'test_lastname',
         gender: 'M',
@@ -86,7 +86,7 @@ const App = () => {
       const data = {
         amount: { currency: 'COP', value: 15000 },
         customer_id: user?.customer_id,
-        merchant_order_id: user?.merchant_customer_id,
+        merchant_order_id: 'YOUR_ID_FROM_YOUR_DB',
         payment_description: 'test_description',
         callback_url: 'http://localhost:3000',
         country: 'CO',
@@ -139,7 +139,7 @@ const App = () => {
         payment_method: { token: result },
         customer_payer: user,
         account_id,
-        merchant_order_id: account_id,
+        merchant_order_id: 'YOUR_ID_FROM_YOUR_DB',
         description: 'test_description_payment',
         country: 'CO',
       };
