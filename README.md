@@ -22,6 +22,7 @@ yarn add react-native-yunosdklite
 1. [Android] Add `apply plugin: 'kotlin-android'` and `implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10"` and `implementation 'com.yuno.payments:android-sdk:1.0.9'` in `android/app/build.gradle`.
 1. [Android] Convert files Java to Kotlin `Click right in option File -> Convert to File Kotlin`.
 1. [Android] Add `import com.yuno.payments.core.Yuno` and `Yuno.initialize(this, "YOUR_API_KEY") under super.onCreate()` in `MainApplication.kt`.
+1. [Android] Add `implementation 'androidx.core:core-ktx:1.7.0` and `implementation 'androidx.appcompat:appcompat:1.4.1` in `android/app/build.gradle`.
 1. [Android] Add `import com.yuno.payments.features.payment.startCheckout` in `MainApplication.kt`.
 1. [Android] Add in `MainActivity.kt`.
 ```javascript

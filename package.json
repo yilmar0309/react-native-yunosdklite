@@ -1,6 +1,6 @@
 {
   "name": "react-native-yunosdklite",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "SDK to react-native from SDK yuno",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

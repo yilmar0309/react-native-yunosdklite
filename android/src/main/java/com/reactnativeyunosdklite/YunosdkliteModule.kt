@@ -57,16 +57,17 @@ class YunosdkliteModule(reactContext: ReactApplicationContext) : ReactContextBas
     @ReactMethod
     fun startCheckout(session: String, countryCode: String, promise: Promise) {
         try {
-            val currentActivity = currentActivity as AppCompatActivity
-            currentActivity?.startCheckout(
-              checkoutSession = session,
-              countryCode = countryCode,
-              callbackOTT = this::onTokenUpdated,
-              callbackPaymentState = this::onPaymentStateChange,
-            )
-            promise.resolve(true)
+          val currentActivity = currentActivity as AppCompatActivity
+          currentActivity?.startCheckout(
+            checkoutSession = session,
+            countryCode = countryCode,
+            callbackOTT = this::onTokenUpdated,
+            callbackPaymentState = this::onPaymentStateChange,
+          )
+          promise.resolve(true)
         } catch (e: Throwable) {
-            promise.reject("startCheckout Error", e)
+          promise.resolve(true)
+            // promise.reject("startCheckout Error", e)
         }
     }
 
