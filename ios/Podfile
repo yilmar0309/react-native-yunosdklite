@@ -3,7 +3,7 @@ platform :ios, '13.0'
 
 target 'Yunosdklite' do
   # Comment the next line if you don't want to use dynamic frameworks
-  pod 'YunoSDK', '~> 1.0.15'
+  pod 'YunoSDK', '~> 1.0.17'
   use_frameworks!
 
   # Pods for Yunosdklite

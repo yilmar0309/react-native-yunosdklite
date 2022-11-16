@@ -22,6 +22,30 @@ yarn add react-native-yunosdklite
 1. [Android] Add `apply plugin: 'kotlin-android'` and `implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10"` and `implementation 'com.yuno.payments:android-sdk:1.0.9'` in `android/app/build.gradle`.
 1. [Android] Convert files Java to Kotlin `Click right in option File -> Convert to File Kotlin`.
 1. [Android] Add `import com.yuno.payments.core.Yuno` and `Yuno.initialize(this, "YOUR_API_KEY") under super.onCreate()` in `MainApplication.kt`.
+1. [Android] Add `import com.yuno.payments.features.payment.startCheckout` in `MainApplication.kt`.
+1. [Android] Add in `MainActivity.kt`.
+```javascript
+
+  private fun onTokenUpdated(token: String?) {
+    token?.let {}
+  }
+
+  private fun onPaymentStateChange(paymentState: String?) {
+    paymentState?.let {}
+  }
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    startCheckout(
+      checkoutSession = "",
+      countryCode = "",
+      callbackOTT = this::onTokenUpdated,
+      callbackPaymentState = this::onPaymentStateChange,
+    )
+  }
+
+```
+
 1. [iOS] Change `platform :ios, '13.0'` to your Podfile.
 1. [iOS] Edit your `AppDelegate.m` as follows:
     ```objc
@@ -191,6 +215,14 @@ If the response indicates a [require_sdk_action](https://docs.y.uno/docs/android
 
 ## Troubleshooting
 1. [iOS] Error `Undefined symbols ___llvm_profile_runtime`, You can implement: `I was also troubled by the problem. To solve this problem, you may want to add -fprofile-instr-generate to Build Settings > Linking > Other Linker Flags.`
+
+2. [iOS] Error `Dark Mode`, You can implement: [Mode Light](https://sarunw.com/posts/how-to-disable-dark-mode-in-ios/).
+
+```js
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+
+```
 
 ## Contributing
 

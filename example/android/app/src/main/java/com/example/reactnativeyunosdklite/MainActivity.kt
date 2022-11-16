@@ -1,11 +1,36 @@
 package com.example.reactnativeyunosdklite
 
+import android.os.Bundle
+import android.os.PersistableBundle
+import android.util.Log
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 import com.example.reactnativeyunosdklite.MainActivity.MainActivityDelegate
 import com.facebook.react.ReactRootView
+import com.yuno.payments.features.payment.startCheckout
 
 class MainActivity : ReactActivity() {
+
+    private fun onTokenUpdated(token: String?) {
+      token?.let {
+      }
+    }
+
+    private fun onPaymentStateChange(paymentState: String?) {
+      paymentState?.let {
+      }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+      super.onCreate(savedInstanceState)
+      startCheckout(
+        checkoutSession = "",
+        countryCode = "",
+        callbackOTT = this::onTokenUpdated,
+        callbackPaymentState = this::onPaymentStateChange,
+      )
+    }
+
     /**
      * Returns the name of the main component registered from JavaScript. This is used to schedule
      * rendering of the component.

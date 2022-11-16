@@ -1,11 +1,9 @@
 package com.reactnativeyunosdklite
 import android.app.Activity
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import com.facebook.react.bridge.*
-import com.yuno.payments.features.payment.PAYMENT_RESULT_DATA_TOKEN
-import com.yuno.payments.features.payment.continuePayment
-import com.yuno.payments.features.payment.startCheckout
-import com.yuno.payments.features.payment.startPaymentLite
+import com.yuno.payments.features.payment.*
 import com.yuno.payments.features.payment.ui.views.PaymentSelected
 
 class YunosdkliteModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
@@ -14,38 +12,41 @@ class YunosdkliteModule(reactContext: ReactApplicationContext) : ReactContextBas
 
     private val activityEventListener =
       object : BaseActivityEventListener() {
-        override fun onActivityResult(
-          activity: Activity?,
-          requestCode: Int,
-          resultCode: Int,
-          intent: Intent?
-        ) {
-          if (requestCode == PAYMENT_REQUEST) {
-            pickerPromise?.let { promise ->
-              when (resultCode) {
-                Activity.RESULT_CANCELED ->
-                  promise.reject(E_PAYMENT_CANCELLED, "Payment was cancelled")
-                Activity.RESULT_OK -> {
-                  val token = intent?.getStringExtra(PAYMENT_RESULT_DATA_TOKEN)
-
-                  token?.let { promise.resolve(token.toString()) }
-                    ?: promise.reject(E_NO_PAYMENT_DATA_FOUND, "No payment data found")
-                }
-              }
-
-              pickerPromise = null
+      override fun onActivityResult(
+        activity: Activity?,
+        requestCode: Int,
+        resultCode: Int,
+        intent: Intent?
+      ) {
+        pickerPromise?.let { promise ->
+          when (resultCode) {
+            Activity.RESULT_CANCELED ->
+              promise.reject(E_PAYMENT_CANCELLED, "Payment was cancelled")
+            Activity.RESULT_OK -> {
             }
           }
         }
       }
-
-    init {
-      reactContext.addActivityEventListener(activityEventListener)
     }
 
-    override fun getName(): String {
-        return "Yunosdklite"
+  init {
+    reactContext.addActivityEventListener(activityEventListener)
+  }
+
+  override fun getName(): String {
+    return "Yunosdklite"
+  }
+
+  private fun onTokenUpdated(token: String?) {
+    token?.let {
+      pickerPromise?.resolve(token)
     }
+  }
+
+  private fun onPaymentStateChange(paymentState: String?) {
+    paymentState?.let {
+    }
+  }
 
    /**
      * @author Alexis Noriega
@@ -56,7 +57,13 @@ class YunosdkliteModule(reactContext: ReactApplicationContext) : ReactContextBas
     @ReactMethod
     fun startCheckout(session: String, countryCode: String, promise: Promise) {
         try {
-            this.currentActivity?.startCheckout(checkoutSession = session, countryCode = countryCode)
+            val currentActivity = currentActivity as AppCompatActivity
+            currentActivity?.startCheckout(
+              checkoutSession = session,
+              countryCode = countryCode,
+              callbackOTT = this::onTokenUpdated,
+              callbackPaymentState = this::onPaymentStateChange,
+            )
             promise.resolve(true)
         } catch (e: Throwable) {
             promise.reject("startCheckout Error", e)
@@ -78,7 +85,7 @@ class YunosdkliteModule(reactContext: ReactApplicationContext) : ReactContextBas
         }
         pickerPromise = promise
         try {
-            activity?.startPaymentLite(requestCode = PAYMENT_REQUEST, PaymentSelected(paymentMethodType = type, vaultedToken = null))
+            activity?.startPaymentLite(PaymentSelected(paymentMethodType = type, vaultedToken = null))
         } catch (e: Throwable) {
             promise.reject("startPaymentLite Error", e)
         }
@@ -92,18 +99,16 @@ class YunosdkliteModule(reactContext: ReactApplicationContext) : ReactContextBas
     @ReactMethod
     fun continuePayment(promise: Promise) {
         try {
-            this.currentActivity?.continuePayment(requestCode = PAYMENT_REQUEST, showPaymentStatus = true)
+            this.currentActivity?.continuePayment(showPaymentStatus = true)
             promise.resolve(true)
         } catch (e: Throwable) {
             promise.reject("continuePayment Error", e)
         }
     }
 
-    companion object {
-        const val PAYMENT_REQUEST = 1
-        const val E_ACTIVITY_DOES_NOT_EXIST = "E_ACTIVITY_DOES_NOT_EXIST"
-        const val E_PAYMENT_CANCELLED = "E_PICKER_CANCELLED"
-        const val E_NO_PAYMENT_DATA_FOUND = "E_NO_IMAGE_DATA_FOUND"
-    }
+  companion object {
+    const val E_ACTIVITY_DOES_NOT_EXIST = "E_ACTIVITY_DOES_NOT_EXIST"
+    const val E_PAYMENT_CANCELLED = "E_PICKER_CANCELLED"
+  }
 
 }

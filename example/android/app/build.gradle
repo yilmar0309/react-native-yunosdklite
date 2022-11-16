@@ -263,13 +263,16 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
+  implementation 'androidx.core:core-ktx:1.7.0'
+  implementation 'androidx.appcompat:appcompat:1.4.1'
+
     //noinspection GradleDynamicVersion
-    implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation "com.facebook.react:react-native:0.68.2!!"  // From node_modules
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10"
-    implementation 'com.yuno.payments:android-sdk:1.1.0'
+    implementation 'com.yuno.payments:android-sdk:1.2.2'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
