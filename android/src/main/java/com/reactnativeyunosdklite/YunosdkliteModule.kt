@@ -1,8 +1,11 @@
 package com.reactnativeyunosdklite
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.facebook.react.bridge.*
+import com.yuno.payments.features.enrollment.initEnrollment
+import com.yuno.payments.features.enrollment.startEnrollment
 import com.yuno.payments.features.payment.*
 import com.yuno.payments.features.payment.ui.views.PaymentSelected
 
@@ -46,6 +49,53 @@ class YunosdkliteModule(reactContext: ReactApplicationContext) : ReactContextBas
   private fun onPaymentStateChange(paymentState: String?) {
     paymentState?.let {
     }
+  }
+
+  private fun onEnrollmentStateChange(enrollmentState: String?) {
+    enrollmentState?.let {
+      Log.d("YunosdkliteModule State", it)
+    }
+  }
+
+  /**
+   * @author Alexis Noriega
+   * @return boolean
+   */
+  @ReactMethod
+  fun initEnrollment(promise: Promise) {
+    try {
+      val currentActivity = currentActivity as AppCompatActivity
+      currentActivity?.initEnrollment(
+        this::onEnrollmentStateChange
+      )
+      promise.resolve(true)
+    } catch (e: Throwable) {
+      promise.resolve(true)
+      // promise.reject("startCheckout Error", e)
+    }
+  }
+
+  @ReactMethod
+  fun startEnrollment(
+    customerSession: String,
+    countryCode: String,
+    promise: Promise
+  ) {
+    try {
+      val activity = currentActivity
+      if (activity == null) {
+        promise.reject(E_ACTIVITY_DOES_NOT_EXIST, "Activity doesn't exist")
+        return
+      }
+      activity.startEnrollment(
+        customerSession = customerSession,
+        countryCode = countryCode
+      )
+      promise.resolve(true)
+    } catch (e: Throwable) {
+      promise.reject("startEnrollment Error", e)
+    }
+
   }
 
    /**

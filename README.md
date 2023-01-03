@@ -25,6 +25,7 @@ yarn add react-native-yunosdklite
 1. [Android] Add `implementation 'androidx.core:core-ktx:1.7.0` and `implementation 'androidx.appcompat:appcompat:1.4.1` in `android/app/build.gradle`.
 1. [Android] Add `import com.yuno.payments.features.payment.startCheckout` in `MainApplication.kt`.
 1. [Android] Add in `MainActivity.kt`.
+
 ```javascript
 
   private fun onTokenUpdated(token: String?) {
@@ -212,6 +213,117 @@ If the response indicates a [require_sdk_action](https://docs.y.uno/docs/android
        console.log('ERROR', error);
      }
    };
+```
+
+Create customer sessions
+
+```js
+  const customerSessions = async () => {
+    try {
+      const data = {
+        account_id: 'ACCOUNT_ID',
+        country: 'COUNTRY_ID',
+        customer_id: 'CUSTOMER_ID',
+        callback_url: ''
+      };
+      const result = await axios.post(
+        'https://api-sandbox.y.uno/v1/customers/sessions',
+        data,
+        {
+          headers: {
+            ...headers,
+            'content-type': 'application/json',
+          },
+        },
+      );
+      setCustomerSession(result.data)
+    } catch (error: any) {
+      console.log('ERROR', error.request.response);
+    }
+  };
+```
+Get payments aviable to enrollment
+
+```js
+  const handleGetPaymentsMethodsEnrollments = async () => {
+    try {
+      const result = await axios.get(
+        `https://api-sandbox.y.uno/v1/checkout/customers/sessions/CUSTOMER_SESSION/payment-methods`,
+        {
+          headers: {
+            ...headers,
+            'content-type': 'application/json',
+          },
+        },
+      );
+      setPaymentMethodsEnrollment(result.data.payment_methods[0]);
+    } catch (error) {
+      console.log('ERROR', error);
+    }
+  };
+```
+Enrollment payment with customer
+
+```js
+ const handleEnrollmentPyament = async () => {
+    try {
+      const data = {
+        account_id: 'ACCOUNT_ID', 
+        payment_method_type: paymentMethodsEnrollment.type, 
+        country: customerSession.country
+      };
+      const result = await axios.post(
+        `https://api-sandbox.y.uno/v1/customers/sessions/${CUSTOMER_SESSIONS}/payment-methods`,
+        data,
+        {
+          headers: {
+            accept: 'application/json',
+            'content-type': 'application/json',
+            'public-api-key': publicKey,
+            'private-secret-key': privateKey,
+            'X-idempotency-key': (Math.random() + 1).toString(36).substring(7),
+          },
+        },
+      );
+      console.log('handleEnrollmentPyament', result);
+    } catch (error) {
+      console.log('ERROR', error);
+    }
+  };
+```
+Init and Start enrollment
+
+```js
+import { initEnrollment, startEnrollment } from 'react-native-yunosdklite';
+  const handleStartEnrollment = async () => {
+    try {
+      await initEnrollment()
+      const result = await startEnrollment(
+        customerSession?.customer_session,
+        customerSession?.country,
+      );
+      console.log('handleStartEnrollment', result);
+    } catch (error) {
+      console.log('ERROR', error);
+    }
+  };
+```
+Init and Start enrollment IOS
+
+```js
+import { initEnrollment, startEnrollment } from 'react-native-yunosdklite';
+  const handleStartEnrollment = async () => {
+    try {
+      // await initEnrollment()
+      const result = await startEnrollment(
+        customerSession?.customer_session,
+        customerSession?.country,
+      );
+      console.log('handleStartEnrollment', result);
+    } catch (error) {
+      console.log('ERROR', error);
+    }
+  };
 ```
 
 ## Troubleshooting

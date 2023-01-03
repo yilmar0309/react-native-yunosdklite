@@ -15,6 +15,12 @@
     )
 
     RCT_EXTERN_METHOD(
+       startEnrollment: (NSString *)session countryCode:(NSString *)countryCode
+       resolve: (RCTPromiseResolveBlock)resolve
+       rejecter: (RCTPromiseRejectBlock)reject
+    )
+
+    RCT_EXTERN_METHOD(
        startPaymentLite: (NSString *)type
        resolve: (RCTPromiseResolveBlock)resolve
        rejecter: (RCTPromiseRejectBlock)reject

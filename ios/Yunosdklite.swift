@@ -11,16 +11,18 @@ class PaymentMethodSelectedZulu: PaymentMethodSelected {
   }
 }
 
+
 @objc(Yunosdklite)
-class Yunosdklite: NSObject, YunoPaymentDelegate {
+class Yunosdklite: NSObject, YunoPaymentDelegate, YunoEnrollmentDelegate {
 
     private var resolver: RCTPromiseResolveBlock? = nil;
     private var rejecter: RCTPromiseRejectBlock? = nil;
+    
     var paymentSelected: PaymentMethodSelectedZulu = PaymentMethodSelectedZulu(vaultedToken: nil, paymentMethodType: "")
     var checkoutSession: String = ""
+    var customerSession: String = ""
     var countryCode: String = ""
     var language: String = "es"
-    var customerSession: String = ""
     var tokenResult: String = ""
     var navigationController: UINavigationController?
     
@@ -42,6 +44,23 @@ class Yunosdklite: NSObject, YunoPaymentDelegate {
           Yuno.initialize(apiKey: apiKey as String)
       };
       resolve(true)
+    }
+    
+    @objc
+    func startEnrollment(
+       _ session: NSString,
+       countryCode: NSString,
+       resolve: @escaping RCTPromiseResolveBlock,
+       rejecter reject: @escaping RCTPromiseRejectBlock
+     ) -> Void {
+       self.customerSession = session as String
+       self.countryCode = "CO"
+         debugPrint("type: startEnrollment \(customerSession)")
+         debugPrint("type: startEnrollment TEST \(countryCode)")
+       DispatchQueue.main.async {
+           Yuno.enrollPayment(with: self, showPaymentStatus: true)
+       }
+       resolve(true)
     }
     
     @objc
@@ -85,6 +104,10 @@ class Yunosdklite: NSObject, YunoPaymentDelegate {
          Yuno.continuePayment()
        }
        resolve(true)
+    }
+    
+    func yunoEnrollmentResult(_ result: Yuno.Result) {
+        debugPrint("type: yunoEnrollmentResult \(result)")
     }
      
     func yunoPaymentResult(_ result: Yuno.Result) {

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4BD6F37B2037BB5113281ED8 /* Pods_Yunosdklite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88BEDB6373A21C9DCFD1D6B7 /* Pods_Yunosdklite.framework */; };
+		6484B53A90E273A05BB9A877 /* Pods_Yunosdklite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B211810F3F8D039488BE8F78 /* Pods_Yunosdklite.framework */; };
 		F4FF95D7245B92E800C19C63 /* Yunosdklite.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /* Yunosdklite.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,10 +25,10 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libYunosdklite.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libYunosdklite.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		1B4988E704AC71F68B93D85C /* Pods-Yunosdklite.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yunosdklite.debug.xcconfig"; path = "Target Support Files/Pods-Yunosdklite/Pods-Yunosdklite.debug.xcconfig"; sourceTree = "<group>"; };
-		42B92C005111F211859C2F28 /* Pods-Yunosdklite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yunosdklite.release.xcconfig"; path = "Target Support Files/Pods-Yunosdklite/Pods-Yunosdklite.release.xcconfig"; sourceTree = "<group>"; };
-		88BEDB6373A21C9DCFD1D6B7 /* Pods_Yunosdklite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yunosdklite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		742E9BCE34D70A8167BBB6A9 /* Pods-Yunosdklite.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yunosdklite.debug.xcconfig"; path = "Target Support Files/Pods-Yunosdklite/Pods-Yunosdklite.debug.xcconfig"; sourceTree = "<group>"; };
+		B211810F3F8D039488BE8F78 /* Pods_Yunosdklite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yunosdklite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3E7B5891CC2AC0600A0062D /* Yunosdklite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yunosdklite.m; sourceTree = "<group>"; };
+		C08A374B195E9E1C57B4A9AE /* Pods-Yunosdklite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yunosdklite.release.xcconfig"; path = "Target Support Files/Pods-Yunosdklite/Pods-Yunosdklite.release.xcconfig"; sourceTree = "<group>"; };
 		F4FF95D5245B92E700C19C63 /* Yunosdklite-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Yunosdklite-Bridging-Header.h"; sourceTree = "<group>"; };
 		F4FF95D6245B92E800C19C63 /* Yunosdklite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yunosdklite.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -38,7 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4BD6F37B2037BB5113281ED8 /* Pods_Yunosdklite.framework in Frameworks */,
+				6484B53A90E273A05BB9A877 /* Pods_Yunosdklite.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,14 +53,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		35807BE902B3D0CE1404BCC1 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				88BEDB6373A21C9DCFD1D6B7 /* Pods_Yunosdklite.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
@@ -68,19 +60,26 @@
 				B3E7B5891CC2AC0600A0062D /* Yunosdklite.m */,
 				F4FF95D5245B92E700C19C63 /* Yunosdklite-Bridging-Header.h */,
 				134814211AA4EA7D00B7C361 /* Products */,
-				EACA6852B2A26B322349428B /* Pods */,
-				35807BE902B3D0CE1404BCC1 /* Frameworks */,
+				7A0ED85E42A4AE812D122151 /* Pods */,
+				89B11E307ACB957C4B55E631 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		EACA6852B2A26B322349428B /* Pods */ = {
+		7A0ED85E42A4AE812D122151 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1B4988E704AC71F68B93D85C /* Pods-Yunosdklite.debug.xcconfig */,
-				42B92C005111F211859C2F28 /* Pods-Yunosdklite.release.xcconfig */,
+				742E9BCE34D70A8167BBB6A9 /* Pods-Yunosdklite.debug.xcconfig */,
+				C08A374B195E9E1C57B4A9AE /* Pods-Yunosdklite.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		89B11E307ACB957C4B55E631 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B211810F3F8D039488BE8F78 /* Pods_Yunosdklite.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -90,7 +89,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "Yunosdklite" */;
 			buildPhases = (
-				9445160B81DE15AC98739AB0 /* [CP] Check Pods Manifest.lock */,
+				8AFAF9191BEF35F5C5E974E6 /* [CP] Check Pods Manifest.lock */,
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
 				58B511D91A9E6C8500147676 /* CopyFiles */,
@@ -137,7 +136,7 @@
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9445160B81DE15AC98739AB0 /* [CP] Check Pods Manifest.lock */ = {
+		8AFAF9191BEF35F5C5E974E6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -270,8 +269,9 @@
 		};
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1B4988E704AC71F68B93D85C /* Pods-Yunosdklite.debug.xcconfig */;
+			baseConfigurationReference = 742E9BCE34D70A8167BBB6A9 /* Pods-Yunosdklite.debug.xcconfig */;
 			buildSettings = {
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -290,8 +290,9 @@
 		};
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 42B92C005111F211859C2F28 /* Pods-Yunosdklite.release.xcconfig */;
+			baseConfigurationReference = C08A374B195E9E1C57B4A9AE /* Pods-Yunosdklite.release.xcconfig */;
 			buildSettings = {
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
