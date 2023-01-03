@@ -9,20 +9,19 @@ const LINKING_ERROR =
 const Yunosdklite = NativeModules.Yunosdklite
   ? NativeModules.Yunosdklite
   : new Proxy(
-    {},
-    {
-      get() {
-        throw new Error(LINKING_ERROR);
-      },
-    }
-  );
+      {},
+      {
+        get() {
+          throw new Error(LINKING_ERROR);
+        },
+      }
+    );
 
 export function initSdkYuno(apiKey: string): Promise<boolean> {
   return Yunosdklite.initSdkYuno(apiKey);
 }
 
-export function initEnrollment(
-): Promise<boolean> {
+export function initEnrollment(): Promise<boolean> {
   return Yunosdklite.initEnrollment();
 }
 

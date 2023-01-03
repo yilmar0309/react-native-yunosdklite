@@ -42,7 +42,7 @@ class MainApplication : Application(), ReactApplication {
     override fun onCreate() {
         super.onCreate()
         // If you opted-in for the New Architecture, we enable the TurboModule system
-        Yuno.initialize(this, "sandbox_gAAAAABjBoLx8XiD6aov0LM836yVQ_Gkm_dllU12Evv2bihNEn9Bc8g9gOwMjR2y1tziPHt4BZCMUznO_YrzlxKMWmuiFRscm_S0II_7pZeTJVuFWNj4__LnwTdzb0S2IedNGd-FNp8nN2gui38owP5ikCYKmEIaQ6DfP9yux25LK-KyUheeWSo=")
+        Yuno.initialize(this, "")
         ReactFeatureFlags.useTurboModules = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED
         SoLoader.init(this,  /* native exopackage */false)
         initializeFlipper(this, reactNativeHost.reactInstanceManager)

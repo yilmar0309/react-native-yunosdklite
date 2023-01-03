@@ -10,7 +10,13 @@
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Button, Platform, SafeAreaView, StatusBar, useColorScheme } from 'react-native';
+import {
+  Button,
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  useColorScheme,
+} from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import {
   initSdkYuno,
@@ -18,15 +24,15 @@ import {
   startPaymentLite,
   continuePayment,
   initEnrollment,
-  startEnrollment
+  startEnrollment,
 } from 'react-native-yunosdklite';
 
 const publicKey = '';
 const privateKey = '';
 const account_id = '';
-const country = 'CO'
-const customer_id = ''
-const YOUR_ID_FROM_YOUR_DB = (Math.random() + 1).toString(36).substring(7)
+const country = 'CO';
+const customer_id = '';
+const YOUR_ID_FROM_YOUR_DB = (Math.random() + 1).toString(36).substring(7);
 
 const headers = {
   'accept': 'application/json',
@@ -41,7 +47,8 @@ const App = () => {
   const [session, setSession]: any = useState(null);
   const [customerSession, setCustomerSession]: any = useState(null);
   const [paymentMethods, setPaymentMethods]: any = useState(null);
-  const [paymentMethodsEnrollment, setPaymentMethodsEnrollment]: any = useState(null);
+  const [paymentMethodsEnrollment, setPaymentMethodsEnrollment]: any =
+    useState(null);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -94,7 +101,7 @@ const App = () => {
         account_id,
         country,
         customer_id,
-        callback_url: ''
+        callback_url: '',
       };
       const result = await axios.post(
         'https://api-sandbox.y.uno/v1/customers/sessions',
@@ -104,9 +111,9 @@ const App = () => {
             ...headers,
             'content-type': 'application/json',
           },
-        },
+        }
       );
-      setCustomerSession(result.data)
+      setCustomerSession(result.data);
     } catch (error: any) {
       console.log('ERROR', error.request.response);
     }
@@ -163,7 +170,7 @@ const App = () => {
             ...headers,
             'content-type': 'application/json',
           },
-        },
+        }
       );
       setPaymentMethodsEnrollment(result.data.payment_methods[0]);
     } catch (error) {
@@ -174,22 +181,22 @@ const App = () => {
   const handleEnrollmentPyament = async () => {
     try {
       const data = {
-        account_id, 
-        payment_method_type: paymentMethodsEnrollment.type, 
-        country: customerSession.country
+        account_id,
+        payment_method_type: paymentMethodsEnrollment.type,
+        country: customerSession.country,
       };
       const result = await axios.post(
         `https://api-sandbox.y.uno/v1/customers/sessions/${customerSession.customer_session}/payment-methods`,
         data,
         {
           headers: {
-            accept: 'application/json',
+            'accept': 'application/json',
             'content-type': 'application/json',
             'public-api-key': publicKey,
             'private-secret-key': privateKey,
             'X-idempotency-key': (Math.random() + 1).toString(36).substring(7),
           },
-        },
+        }
       );
       console.log('handleEnrollmentPyament', result);
     } catch (error) {
@@ -199,10 +206,10 @@ const App = () => {
 
   const handleStartEnrollment = async () => {
     try {
-      await initEnrollment()
+      await initEnrollment();
       const result = await startEnrollment(
         customerSession?.customer_session,
-        customerSession?.country,
+        customerSession?.country
       );
       console.log('handleStartEnrollment', result);
     } catch (error) {
@@ -213,10 +220,10 @@ const App = () => {
   const handleStartEnrollmentIO = async () => {
     try {
       // await initEnrollment()
-      console.log('customerSession', customerSession)
+      console.log('customerSession', customerSession);
       const result = await startEnrollment(
         customerSession?.customer_session,
-        customerSession?.country,
+        customerSession?.country
       );
       console.log('handleStartEnrollment', result);
     } catch (error) {
@@ -259,19 +266,25 @@ const App = () => {
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <StatusBar 
-        animated
-        barStyle='default'
-      />
-     <Button title="Create customer" onPress={createCustomer} />
+      <StatusBar animated barStyle="default" />
+      <Button title="Create customer" onPress={createCustomer} />ƒ
       <Button title="Create customer sessions" onPress={customerSessions} />
-      <Button title="handle Get Payments Enrollment" onPress={handleGetPaymentsMethodsEnrollments} />
-      <Button title="handle Enrollment Pyament Methods" onPress={handleEnrollmentPyament} />
+      <Button
+        title="handle Get Payments Enrollment"
+        onPress={handleGetPaymentsMethodsEnrollments}
+      />
+      <Button
+        title="handle Enrollment Pyament Methods"
+        onPress={handleEnrollmentPyament}
+      />
       <Button title="handle Start Enrollment" onPress={handleStartEnrollment} />
       <Button title="Create session" onPress={createSession} />
       <Button title="handle Get Payments" onPress={handleGetPayments} />
       <Button title="handle Start Checkout" onPress={handleStartCheckout} />
-      <Button title="handle Start Enrollment IOS" onPress={handleStartEnrollmentIO} />
+      <Button
+        title="handle Start Enrollment IOS"
+        onPress={handleStartEnrollmentIO}
+      />
       <Button
         title="handle Start Payment Lite"
         onPress={handleStartPaymentLite}
